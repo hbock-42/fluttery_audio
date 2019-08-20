@@ -9,3 +9,5 @@ build/
 
 .idea/
 *.iml
+
+*flutter_export_environment.sh
