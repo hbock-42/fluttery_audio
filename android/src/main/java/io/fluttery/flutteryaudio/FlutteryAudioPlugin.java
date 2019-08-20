@@ -231,8 +231,22 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
                 byte[] fft = Arrays.copyOf(sharedFft, sharedFft.length);
                 
                 Map<String, Object> args = new HashMap<>();
-                args.put("fft", fft);
+//                args.put("fft", fft);
+//
+//                visualizerChannel.invokeMethod("onFftVisualization", args);
+                
+                // mine
 
+
+                double sum = 0;
+                for (int i = 0; i < fft.length / 2; i++)
+                {
+                  double y = (fft[i * 2] | fft[i * 2 + 1] << 8) / 32768.0;
+                  sum += y * y;
+                }
+                double rms = Math.sqrt(sum / fft.length / 2);
+                double decibelAmplitude = (float)(20.0 * Math.log10(rms));
+                args.put("decibels", decibelAmplitude);
                 visualizerChannel.invokeMethod("onFftVisualization", args);
               }
             });

@@ -21,6 +21,7 @@ public class AudioVisualizer {
         // TODO: support multiple AuidioPlayers
         visualizer = new Visualizer(AudioPlayer.playerId);
         visualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
+        visualizer.setMeasurementMode(Visualizer.MEASUREMENT_MODE_PEAK_RMS);
         visualizer.setDataCaptureListener(
                 listener,
                 Visualizer.getMaxCaptureRate() / 2,

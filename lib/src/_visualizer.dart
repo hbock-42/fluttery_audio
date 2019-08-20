@@ -7,7 +7,7 @@ final _log = new Logger('Visualizer');
 
 class Visualizer extends StatefulWidget {
 
-  final Function(BuildContext context, List<int> fft) builder;
+  final Function(BuildContext context, List<double> fft) builder;
 
   Visualizer({
     this.builder,
@@ -20,7 +20,7 @@ class Visualizer extends StatefulWidget {
 class _VisualizerState extends State<Visualizer> {
 
   AudioVisualizer visualizer;
-  List<int> fft = const [];
+  List<double> fft = const [];
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _VisualizerState extends State<Visualizer> {
     visualizer = FlutteryAudio.audioVisualizer()
       ..activate()
       ..addListener(
-          fftCallback: (List<int> samples) {
+          fftCallback: (List<double> samples) {
             _log.fine('Got FFT samples: $samples');
             setState(() => fft = samples);
           }

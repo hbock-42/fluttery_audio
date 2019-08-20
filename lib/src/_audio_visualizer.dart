@@ -12,12 +12,13 @@ class AudioVisualizer {
   AudioVisualizer({
     this.channel,
   }) {
+    // ignore: missing_return
     channel.setMethodCallHandler((MethodCall call) {
       _log.fine('Received AudioVisualizer call: ${call.method}');
 
       switch (call.method) {
         case 'onFftVisualization':
-          List<int> samples = call.arguments['fft'];
+          List<double> samples = call.arguments['decibels'];
           for (Function callback in _fftCallbacks) {
             callback(samples);
           }
@@ -74,5 +75,5 @@ class AudioVisualizer {
 
 }
 
-typedef void FftCallback(List<int> fftSamples);
+typedef void FftCallback(List<double> fftSamples);
 typedef void WaveformCallback(List<int> waveformSamples);

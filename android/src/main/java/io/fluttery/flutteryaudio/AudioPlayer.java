@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+import android.os.Looper;
 
 /**
  * Android side of AudioPlayer for the fluttery_audio plugin.
@@ -37,7 +38,7 @@ public class AudioPlayer {
 
         HandlerThread handlerThread = new HandlerThread("AudioPlayer");
         handlerThread.start();
-        playbackPollHandler = new Handler(handlerThread.getLooper());
+        playbackPollHandler = new Handler(Looper.getMainLooper());
 
         MediaPlayerCallbacks mediaPlayerCallbacks = new MediaPlayerCallbacks();
         mediaPlayer.setOnPreparedListener(mediaPlayerCallbacks);
