@@ -146,7 +146,7 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
           String audioUrl = call.argument("audioUrl");
 
           AssetManager assetManager = registrar.context().getAssets();
-          String assetPath = registrar.lookupKeyForAsset("icons/heart.png");
+          String assetPath = registrar.lookupKeyForAsset(audioUrl);
 
           Log.d(TAG, "Sound path is: " + assetPath);
 
