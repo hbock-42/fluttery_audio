@@ -237,7 +237,7 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
                 
                 // mine
 
-
+                // https://stackoverflow.com/a/9812267
                 double sum = 0;
                 for (int i = 0; i < fft.length / 2; i++)
                 {
