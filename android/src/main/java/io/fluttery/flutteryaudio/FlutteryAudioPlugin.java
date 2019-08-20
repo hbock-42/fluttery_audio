@@ -1,5 +1,6 @@
 package io.fluttery.flutteryaudio;
 
+import android.content.res.AssetManager;
 import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
 import androidx.annotation.NonNull;
@@ -28,11 +29,13 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
 
   private static MethodChannel channel;
   private static MethodChannel visualizerChannel;
+  private static Registrar registrar;
 
   /**
    * Plugin registration.
    */
   public static void registerWith(Registrar registrar) {
+    registrar = registrar;
     channel = new MethodChannel(registrar.messenger(), "fluttery_audio");
     channel.setMethodCallHandler(new FlutteryAudioPlugin());
 
@@ -140,7 +143,15 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
         case "load":
           Log.d(TAG, "Loading new audio.");
           String audioUrl = call.argument("audioUrl");
-          player.load(audioUrl);
+
+          AssetManager assetManager = registrar.context().getAssets();
+          String assetPath = registrar.lookupKeyForAsset("icons/heart.png");
+
+          if (assetPath != null && !assetPath.isEmpty()) {
+            player.load(assetPath);
+          } else {
+            player.load(audioUrl);
+          }
           break;
         case "play":
           Log.d(TAG, "Playing audio");
