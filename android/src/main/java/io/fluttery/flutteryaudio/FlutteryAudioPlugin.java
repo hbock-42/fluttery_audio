@@ -143,6 +143,7 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
       switch (playerCall.command) {
         case "load":
           Log.d(TAG, "Loading new audio.");
+          Log.d(TAG, "test12 ");
           String audioUrl = call.argument("audioUrl");
           Log.d(TAG, "Audio url: " + audioUrl);
 
