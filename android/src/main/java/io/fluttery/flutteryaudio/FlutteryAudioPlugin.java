@@ -30,13 +30,13 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
 
   private static MethodChannel channel;
   private static MethodChannel visualizerChannel;
-  private static Registrar registrar;
+  private static Registrar _registrar;
 
   /**
    * Plugin registration.
    */
   public static void registerWith(Registrar registrar) {
-    registrar = registrar;
+    _registrar = registrar;
     channel = new MethodChannel(registrar.messenger(), "fluttery_audio");
     channel.setMethodCallHandler(new FlutteryAudioPlugin());
 
@@ -143,12 +143,11 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
       switch (playerCall.command) {
         case "load":
           Log.d(TAG, "Loading new audio.");
-          Log.d(TAG, "test12 ");
           String audioUrl = call.argument("audioUrl");
           Log.d(TAG, "Audio url: " + audioUrl);
 
-          AssetManager assetManager = registrar.context().getAssets();
-          String assetPath = registrar.lookupKeyForAsset(audioUrl);
+          AssetManager assetManager = _registrar.context().getAssets();
+          String assetPath = _registrar.lookupKeyForAsset(audioUrl);
 
           Log.d(TAG, "Sound path is: " + assetPath);
 
