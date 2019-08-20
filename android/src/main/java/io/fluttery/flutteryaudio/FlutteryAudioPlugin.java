@@ -6,6 +6,7 @@ import android.media.audiofx.Visualizer;
 import androidx.annotation.NonNull;
 import android.util.Log;
 
+import java.io.Console;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -146,6 +147,8 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
 
           AssetManager assetManager = registrar.context().getAssets();
           String assetPath = registrar.lookupKeyForAsset("icons/heart.png");
+
+          Log.d(TAG, "Sound path is: " + assetPath);
 
           if (assetPath != null && !assetPath.isEmpty()) {
             player.load(assetPath);
