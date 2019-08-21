@@ -35,6 +35,10 @@ class AudioPlayer {
           _log.fine('FFT Visualization:');
           _log.fine('${call.arguments['fft'].runtimeType}');
           break;
+        case "onDecibelVisualization":
+          _log.fine('Decbiel Visualization:');
+          _log.fine('${call.arguments['decibel'].runtimeType}');
+          break;
         case "onAudioLoading":
           _log.fine('onAudioLoading');
 

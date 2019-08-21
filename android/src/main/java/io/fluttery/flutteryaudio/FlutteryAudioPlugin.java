@@ -256,18 +256,19 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
                 // mine
 
                 // https://stackoverflow.com/a/9812267
-//                double sum = 0;
-//                for (int i = 0; i < fft.length / 2; i++)
-//                {
-//                  double y = (fft[i * 2] | fft[i * 2 + 1] << 8) / 32768.0;
-//                  sum += y * y;
-//                }
-//                double rms = Math.sqrt(sum / fft.length / 2);
-//                double decibelAmplitude = (float)(20.0 * Math.log10(rms));
-//                Log.d(TAG, "visualizer sampling rate = " + samplingRate);
-//                Log.d(TAG, "visualizer decibel = " + decibelAmplitude);
-//                args.put("decibels", decibelAmplitude);
-//                visualizerChannel.invokeMethod("onFftVisualization", args);
+                double sum = 0;
+                for (int i = 0; i < fft.length / 2; i++)
+                {
+                  double y = (fft[i * 2] | fft[i * 2 + 1] << 8) / 32768.0;
+                  sum += y * y;
+                }
+                double rms = Math.sqrt(sum / fft.length / 2);
+                double decibelAmplitude = (float)(20.0 * Math.log10(rms));
+                Log.d(TAG, "visualizer sampling rate = " + samplingRate);
+                Log.d(TAG, "visualizer decibel = " + decibelAmplitude);
+                Map<String, Object> argsDecibel = new HashMap<>();
+                argsDecibel.put("decibels", decibelAmplitude);
+                visualizerChannel.invokeMethod("onDecibelVisualization", argsDecibel);
               }
             });
             break;
