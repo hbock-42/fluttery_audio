@@ -84,7 +84,7 @@ public class AudioPlayer {
     }
 
     public void load(FileDescriptor fd) {
-        Log.d(TAG, "load()");
+        Log.d(TAG, "load() - AudioPlayer.java");
         try {
             // Stop polling the playhead position in case we were already
             // playing some audio.

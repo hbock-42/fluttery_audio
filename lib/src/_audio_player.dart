@@ -25,6 +25,7 @@ class AudioPlayer {
     // TODO: existing AudioPlayers
     _setState(AudioPlayerState.idle);
 
+    // ignore: missing_return
     channel.setMethodCallHandler((MethodCall call) {
       _log.fine('Received channel message: ${call.method}');
       switch (call.method) {
@@ -33,7 +34,7 @@ class AudioPlayer {
           _log.fine('${call.arguments['fft'].runtimeType}');
           break;
         case "onAudioLoading":
-          _log.fine('onAudioLoading');
+          _log.fine('onAudioLoading - api');
 
           // If new audio is loading then we have no playhead position and we
           // don't know the audio length.
@@ -125,7 +126,7 @@ class AudioPlayer {
       }
     });
 
-    channel.invokeMethod('audioplayer/$playerId/activate_visualizer');
+//    channel.invokeMethod('audioplayer/$playerId/activate_visualizer');
   }
 
   void dispose() {

@@ -57,7 +57,7 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
 
       @Override
       public void onAudioLoading() {
-        Log.d(TAG, "Android -> Flutter: onAudioLoading()");
+        Log.d(TAG, "Android -> Flutter: onAudioLoading() - FlutteryAudioPlugin.java");
         channel.invokeMethod("onAudioLoading", null);
       }
 
