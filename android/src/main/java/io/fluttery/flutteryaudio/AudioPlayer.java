@@ -68,7 +68,7 @@ public class AudioPlayer {
         try {
             // Stop polling the playhead position in case we were already
             // playing some audio.
-            stopPlaybackPolling();
+//            stopPlaybackPolling();
 
             Log.d(TAG, "load() -> start mediaPlayer.reset()");
             mediaPlayer.reset();
