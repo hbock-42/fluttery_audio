@@ -248,13 +248,13 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
               @Override
               public void onFftDataCapture(Visualizer visualizer, byte[] sharedFft, int samplingRate) {
                 byte[] fft = Arrays.copyOf(sharedFft, sharedFft.length);
-                
+
+                // raw fft
                 Map<String, Object> args = new HashMap<>();
                 args.put("fft", fft);
                 visualizerChannel.invokeMethod("onFftVisualization", args);
 
-                // mine
-
+                // decibel calculation
                 // https://stackoverflow.com/a/9812267
                 double sum = 0;
                 for (int i = 0; i < fft.length / 2; i++)
@@ -264,8 +264,6 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
                 }
                 double rms = Math.sqrt(sum / fft.length / 2);
                 double decibelAmplitude = (float)(20.0 * Math.log10(rms));
-                Log.d(TAG, "visualizer sampling rate = " + samplingRate);
-                Log.d(TAG, "visualizer decibel = " + decibelAmplitude);
                 Map<String, Object> argsDecibel = new HashMap<>();
                 argsDecibel.put("decibels", decibelAmplitude);
                 visualizerChannel.invokeMethod("onDecibelVisualization", argsDecibel);
