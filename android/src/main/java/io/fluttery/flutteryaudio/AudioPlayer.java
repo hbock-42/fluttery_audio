@@ -6,6 +6,7 @@ import android.os.HandlerThread;
 import androidx.annotation.NonNull;
 import android.util.Log;
 
+import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Set;
@@ -71,6 +72,26 @@ public class AudioPlayer {
 
             mediaPlayer.reset();
             mediaPlayer.setDataSource(url);
+            mediaPlayer.prepareAsync();
+
+            state = State.loading;
+            for (Listener listener : listeners) {
+                listener.onAudioLoading();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void load(FileDescriptor fd) {
+        Log.d(TAG, "load()");
+        try {
+            // Stop polling the playhead position in case we were already
+            // playing some audio.
+            stopPlaybackPolling();
+
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(fd);
             mediaPlayer.prepareAsync();
 
             state = State.loading;

@@ -1,5 +1,6 @@
 package io.fluttery.flutteryaudio;
 
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
@@ -7,6 +8,8 @@ import androidx.annotation.NonNull;
 import android.util.Log;
 
 import java.io.Console;
+import java.io.FileDescriptor;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -148,14 +151,15 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
 
           AssetManager assetManager = _registrar.context().getAssets();
           String assetPath = _registrar.lookupKeyForAsset(audioUrl);
+          FileDescriptor fd = assetManager.openFd(assetPath).getFileDescriptor();
 
           Log.d(TAG, "Sound path is: " + assetPath);
-
-          if (assetPath != null && !assetPath.isEmpty()) {
-            player.load(assetPath);
-          } else {
-            player.load(audioUrl);
-          }
+          player.load(fd);
+//
+//          if (fd) {
+//          } else {
+//            player.load(audioUrl);
+//          }
           break;
         case "play":
           Log.d(TAG, "Playing audio");
@@ -179,6 +183,8 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
       result.success(null);
     } catch (IllegalArgumentException e) {
       result.notImplemented();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 
