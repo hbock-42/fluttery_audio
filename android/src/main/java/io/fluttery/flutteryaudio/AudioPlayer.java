@@ -70,9 +70,13 @@ public class AudioPlayer {
             // playing some audio.
             stopPlaybackPolling();
 
+            Log.d(TAG, "load() -> start mediaPlayer.reset()");
             mediaPlayer.reset();
+            Log.d(TAG, "load() -> start mediaPlayer.setDataSource(url)");
             mediaPlayer.setDataSource(url);
+            Log.d(TAG, "load() -> start mediaPlayer.prepareAsync()");
             mediaPlayer.prepareAsync();
+            Log.d(TAG, "load() -> after mediaPlayer.prepareAsync() but not ended");
 
             state = State.loading;
             for (Listener listener : listeners) {
@@ -88,6 +92,7 @@ public class AudioPlayer {
         try {
             // Stop polling the playhead position in case we were already
             // playing some audio.
+
             stopPlaybackPolling();
 
             mediaPlayer.reset();
@@ -251,6 +256,7 @@ public class AudioPlayer {
     }
 
     private void stopPlaybackPolling() {
+        Log.d(TAG, "stopPlaybackPolling()");
         isPollingPlayback = false;
         playbackPollHandler.removeCallbacks(null);
     }
