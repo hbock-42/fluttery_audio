@@ -126,7 +126,7 @@ class AudioPlayer {
       }
     });
 
-//    channel.invokeMethod('audioplayer/$playerId/activate_visualizer');
+    channel.invokeMethod('audioplayer/$playerId/activate_visualizer');
   }
 
   void dispose() {
