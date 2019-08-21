@@ -264,6 +264,7 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
                 }
                 double rms = Math.sqrt(sum / fft.length / 2);
                 double decibelAmplitude = (float)(20.0 * Math.log10(rms));
+                Log.d(TAG, "visualizer decibel = " + decibelAmplitude);
                 args.put("decibels", decibelAmplitude);
                 visualizerChannel.invokeMethod("onFftVisualization", args);
               }
