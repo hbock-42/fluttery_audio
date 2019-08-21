@@ -147,16 +147,15 @@ public class FlutteryAudioPlugin implements MethodCallHandler {
         case "load":
           Log.d(TAG, "Loading new audio.");
           String audioUrl = call.argument("audioUrl");
-          Log.d(TAG, "Audio url: " + audioUrl);
 
           AssetManager assetManager = _registrar.context().getAssets();
           String assetPath = _registrar.lookupKeyForAsset(audioUrl);
           if (Arrays.asList(assetManager.list("")).contains(assetPath)) {
             FileDescriptor fd = assetManager.openFd(assetPath).getFileDescriptor();
-            Log.d(TAG, "Load asset: " + assetPath);
+            Log.d(TAG, "load from asset: " + assetPath);
             player.load(fd);
           } else {
-            Log.d(TAG, "Load url: " + audioUrl);
+            Log.d(TAG, "load from url: " + audioUrl);
             player.load(audioUrl);
           }
           break;

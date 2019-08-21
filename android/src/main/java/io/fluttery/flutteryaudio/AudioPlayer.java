@@ -64,7 +64,7 @@ public class AudioPlayer {
     }
 
     public void load(String url) {
-        Log.d(TAG, "load()");
+        Log.d(TAG, "load(url)");
         try {
             // Stop polling the playhead position in case we were already
             // playing some audio.
@@ -84,20 +84,16 @@ public class AudioPlayer {
     }
 
     public void load(FileDescriptor fd) {
-        Log.d(TAG, "load() - AudioPlayer.java");
+        Log.d(TAG, "load(fd)");
         try {
             // Stop polling the playhead position in case we were already
             // playing some audio.
 
             stopPlaybackPolling();
 
-            Log.d(TAG, "load() -> start mediaPlayer.reset()");
             mediaPlayer.reset();
-            Log.d(TAG, "load() -> start mediaPlayer.setDataSource(url)");
             mediaPlayer.setDataSource(fd);
-            Log.d(TAG, "load() -> start mediaPlayer.prepareAsync()");
             mediaPlayer.prepareAsync();
-            Log.d(TAG, "load() -> after mediaPlayer.prepareAsync() but not ended");
 
             state = State.loading;
             for (Listener listener : listeners) {
@@ -256,7 +252,6 @@ public class AudioPlayer {
     }
 
     private void stopPlaybackPolling() {
-        Log.d(TAG, "stopPlaybackPolling()");
         isPollingPlayback = false;
         playbackPollHandler.removeCallbacks(null);
     }

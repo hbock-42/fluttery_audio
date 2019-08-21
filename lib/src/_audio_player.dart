@@ -36,7 +36,7 @@ class AudioPlayer {
           _log.fine('${call.arguments['fft'].runtimeType}');
           break;
         case "onAudioLoading":
-          _log.fine('onAudioLoading - api');
+          _log.fine('onAudioLoading');
 
           // If new audio is loading then we have no playhead position and we
           // don't know the audio length.
