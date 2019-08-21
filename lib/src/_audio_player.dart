@@ -22,7 +22,7 @@ class AudioPlayer {
     this.channel,
   }) {
     
-    _log.fine('Api/Creating AudioPlayer')
+    _log.fine('Api/Creating AudioPlayer');
     // TODO: ask channel for initial state so that Flutter can connect to
     // TODO: existing AudioPlayers
     _setState(AudioPlayerState.idle);
